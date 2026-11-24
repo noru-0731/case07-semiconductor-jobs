@@ -201,6 +201,16 @@ ul { list-style:none }
 
 
 .cur .card.a.on:has(svg, canvas) { animation-duration:var(--viz) }
+
+#p3 .stats { display:flex; flex-direction:column; gap:var(--s3) }
+#p3 .stats .card:first-child { flex:1 }
+#p3 .stats .card { padding:var(--s3) var(--s4) }
+#p3 .stats svg { margin-top:var(--s2); overflow:visible }
+.st { font:700 var(--t5)/1.4 var(--mono); color:var(--ink) } .st span { font-weight:400; color:var(--cap) }
+.growx { transform-box:fill-box; transform-origin:left; transform:scaleX(0) }
+.cur .on .growx { animation:growx 1800ms var(--ease) 400ms both }
+@keyframes growx { to { transform:scaleX(1) } }
+body.static .growx { transform:none; animation:none !important }
 /* 인쇄: 쪽마다 1920×1080, 다 나온 상태 */
 @page { size:1920px 1080px; margin:0 }
 @media print {
@@ -329,18 +339,24 @@ body.static .slide::before { animation:none }
         <text class="xl" x="580" y="536" text-anchor="middle">2026 1분기</text>
       </svg>
     </figure>
-    <div class="stack">
-      <ul class="bul hot">
-        <li class="a">반도체 일자리 역대 최대 (15만 2천 → 17만 4천, +14.5%)</li>
-        <li class="a">신규채용 일자리 감소 (3만 7천 → 2만 9천, −21.6%)</li>
-        <li class="a">신규채용 비중 하락 (24.3% → 16.7%)</li>
-        <li class="a">지속일자리 역대 최대 (14만 6천)</li>
-        <li class="a">신규채용은 2024년 저점 뒤 2년 연속 반등, 2018년에는 못 미침</li>
-      </ul>
-      <div class="note hot card a">
-        <p class="lbl">// 읽을 때 주의</p>
-        <p>신입·경력 구분 없는 수치. 업계 설명은 설비 중심 산업 구조</p>
-      </div>
+    <div class="stats">
+      <figure class="card a">
+        <h3 class="st">신규채용 일자리 추이 <span>· 2018·2026년은 1분기</span></h3>
+        <svg width="780" height="188" viewBox="0 0 780 188">
+          <line class="ax" x1="0" y1="158" x2="780" y2="158"/>
+          <polyline class="ln draw" pathLength="1" points="60,39.2 400,28.0 570,100.8 740,84.0" style="stroke:var(--hot)"/>
+          <circle class="pulse" cx="740" cy="84.0" r="8" style="stroke:var(--hot)"/>
+          <circle class="pt" cx="60" cy="39.2" r="7" style="stroke:var(--hot)"/><text class="vl" x="60" y="23.2" text-anchor="middle">3만 7천</text><text class="xl" x="60" y="184" text-anchor="middle">2018</text><circle class="pt" cx="400" cy="28.0" r="7" style="stroke:var(--hot)"/><text class="vl" x="400" y="12.0" text-anchor="middle">3만 9천 · 정점</text><text class="xl" x="400" y="184" text-anchor="middle">2022</text><circle class="pt" cx="570" cy="100.8" r="7" style="stroke:var(--hot)"/><text class="vl" x="570" y="134.8" text-anchor="middle">2만 6천 · 저점</text><text class="xl" x="570" y="184" text-anchor="middle">2024</text><circle class="pt" cx="740" cy="84.0" r="7" style="stroke:var(--hot)"/><text class="vl" x="740" y="68.0" text-anchor="middle">2만 9천</text><text class="xl" x="740" y="184" text-anchor="middle">2026</text>
+        </svg>
+      </figure>
+      <figure class="card a">
+        <h3 class="st">전체 일자리 중 신규채용 비중</h3>
+        <svg width="780" height="84" viewBox="0 0 780 84"><text class="xl" x="0" y="24">2018</text><rect x="80" y="0" width="620" height="32" rx="4" style="fill:var(--line)"/><rect class="growx" x="80" y="0" width="150.7" height="32" rx="4" style="fill:var(--hot)"/><text class="vl" x="242.7" y="24">24.3%</text><text class="xl" x="0" y="72">2026</text><rect x="80" y="48" width="620" height="32" rx="4" style="fill:var(--line)"/><rect class="growx" x="80" y="48" width="103.5" height="32" rx="4" style="fill:var(--hot)"/><text class="vl" x="195.5" y="72">16.7%</text></svg>
+      </figure>
+      <figure class="card a">
+        <h3 class="st">취업유발계수 <span>· 한국은행 2023년 기준</span></h3>
+        <svg width="780" height="112" viewBox="0 0 780 112"><text class="xl" x="0" y="21">반도체</text><rect class="growx" x="180" y="0" width="146.3" height="28" rx="4" style="fill:var(--hot)"/><text class="vl" x="338.3" y="22">2.4명</text><text class="xl" x="0" y="63">제조업 평균</text><rect class="growx" x="180" y="42" width="311.0" height="28" rx="4" style="fill:var(--cap)"/><text class="vl" x="503.0" y="64">5.1명</text><text class="xl" x="0" y="105">전체 산업 평균</text><rect class="growx" x="180" y="84" width="500.0" height="28" rx="4" style="fill:var(--cap)"/><text class="vl" x="692.0" y="106">8.2명</text></svg>
+      </figure>
     </div>
   </div>
 </section>
@@ -374,8 +390,8 @@ body.static .slide::before { animation:none }
   </header>
   <div class="cols">
     <figure class="viz card a">
-      <h3>반도체 일자리와 들어오는 문</h3>
-      <div class="legend"><span class="k">● 상자 안 점 1개 = 일자리 1천 개</span><span class="n">● 신규채용 일자리</span><span>문 너비 = 신규채용 수</span></div>
+      <h3>반도체 일자리와 좁은 입구 <span style="font-weight:400;color:var(--cap)">· 못 들어간 점은 튕겨 나감</span></h3>
+      <div class="legend"><span class="k">● 점 1개 = 1천 개</span><span class="n">● 신규채용</span><span>문 너비 = 신규채용 수</span></div>
       <canvas id="door" width="1560" height="760"></canvas>
       <div class="yr"><span id="yrA">2026 1분기 · 일자리 17만 4천</span><span id="yrB">신규 2만 9천 · 비중 16.7%</span></div>
     </figure>
@@ -464,10 +480,21 @@ const hooks={
       for(let i=0;i<n;i++){ const d=dots[i];
         if(!STATIC){ d.x+=d.vx; d.y+=d.vy; if(d.x<boxL+16||d.x>boxR-16) d.vx*=-1; if(d.y<boxT+16||d.y>boxB-16) d.vy*=-1; d.x=Math.min(Math.max(d.x,boxL+16),boxR-16); }
         ctx.fillStyle=i<h?C('--hot'):C('--cap'); ctx.beginPath(); ctx.arc(d.x,d.y,R,0,7); ctx.fill(); }
-      // 문으로 들어오는 흐름
-      if(!STATIC && Math.random()<cur.neu/90) flow.push({x:20,y:mid+(Math.random()-.5)*cur.door*.8});
-      ctx.fillStyle=C('--hot');
-      flow=flow.filter(f=>{ f.x+=6; ctx.globalAlpha=Math.max(0,1-(f.x-boxL)/160); ctx.beginPath(); ctx.arc(f.x,f.y,R*.6,0,7); ctx.fill(); ctx.globalAlpha=1; return f.x<boxL+160; });
+      // 문으로 다가오는 점: 문 틈이면 들어가고, 벽에 맞으면 튕겨 나간다
+      if(!STATIC && Math.random()<.09) flow.push({x:10,y:mid+(Math.random()-.5)*300,vx:2+Math.random()*.6,vy:0,st:0});
+      flow=flow.filter(f=>{
+        f.x+=f.vx; f.y+=f.vy;
+        if(f.st===0 && f.x>=boxL-R){
+          if(f.y>g1+R && f.y<g2-R) f.st=1;
+          else { f.st=2; f.x=boxL-R; f.vx=-(1.2+Math.random()*1.4); f.vy=(Math.random()-.5)*3; }
+        }
+        let a=Math.min(1,f.x/80);
+        if(f.st===1) a=Math.max(0,1-(f.x-boxL)/160);
+        if(f.st===2){ f.vy*=.98; a=Math.max(0,1-(boxL-f.x)/220); }
+        ctx.globalAlpha=a; ctx.fillStyle=f.st===2?C('--cap'):C('--hot');
+        ctx.beginPath(); ctx.arc(f.x,f.y,R*.6,0,7); ctx.fill(); ctx.globalAlpha=1;
+        return a>0 && f.x>0;
+      });
       if(!STATIC) cv._raf=requestAnimationFrame(frame);
     };
     frame();
