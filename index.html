@@ -19,16 +19,16 @@
   /* 간격 */
   --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
   /* 색 */
-  --bg:#0f1318; --panel:#161b22; --ink:#e6edf3; --sub:#9da7b3; --cap:#6e7681; --line:#262c36;
-  --term:#0b0e13; --term-ink:#c9d1d9; --term-dim:#6e7681;
-  --blue:#58a6ff; --blue-soft:#13233a; --hot:#ff7b5c; --hot-soft:#3a1d17; --ok:#3fb950;
+  --bg:#f6f8fa; --panel:#ffffff; --ink:#1f2328; --sub:#59636e; --cap:#8c959f; --line:#d8dee4;
+  --term:#eef1f4; --term-ink:#1f2328; --term-dim:#8c959f;
+  --blue:#0969da; --blue-soft:#ddf4ff; --hot:#d4512b; --hot-soft:#fff1e5; --ok:#1a7f37;
   /* 글꼴·움직임 */
   --sans:"Plex Mono","Pretendard",monospace;
   --mono:"Plex Mono","Pretendard",monospace;
-  --ease:cubic-bezier(.2,.8,.2,1); --motion:420ms;
+  --ease:cubic-bezier(.2,.8,.2,1); --motion:420ms; --viz:900ms;
 }
 * { box-sizing:border-box }
-html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#000 }
+html,body { margin:0; width:100%; height:100%; overflow:hidden; background:var(--bg) }
 body { color:var(--ink); font:400 var(--t3)/1.4 var(--sans); font-variant-numeric:tabular-nums; word-break:keep-all; -webkit-font-smoothing:antialiased }
 h1,h2,h3,p,ul,ol,figure,table { margin:0; padding:0 }
 ul { list-style:none }
@@ -53,10 +53,10 @@ ul { list-style:none }
 .cur .a.on { animation:rise var(--motion) var(--ease) var(--d,0ms) both }
 @keyframes rise { from { opacity:0; transform:translateY(var(--s2)) } to { opacity:1; transform:none } }
 .draw { stroke-dasharray:1; stroke-dashoffset:1 }
-.cur .on .draw, .cur .draw.on { animation:draw 1200ms var(--ease) var(--d,0ms) both }
+.cur .on .draw, .cur .draw.on { animation:draw 2200ms var(--ease) calc(var(--d,0ms) + 300ms) both }
 @keyframes draw { to { stroke-dashoffset:0 } }
 .grow { transform-box:fill-box; transform-origin:bottom; transform:scaleY(0) }
-.cur .on .grow { animation:grow 900ms var(--ease) var(--gd,0ms) both }
+.cur .on .grow { animation:grow 1800ms var(--ease) calc(var(--gd,0ms) + 300ms) both }
 @keyframes grow { to { transform:scaleY(1) } }
 
 /* 머리와 꼬리 */
@@ -89,13 +89,13 @@ ul { list-style:none }
 
 /* ── 1쪽 ── */
 #p1 .head .title { display:none }
-#p1 .qwin { position:absolute; left:var(--s6); right:var(--s6); top:160px; padding-bottom:var(--s5) }
+#p1 .qwin { position:absolute; left:var(--s6); right:var(--s6); top:168px; padding-bottom:var(--s5) }
 #p1 .qwin .cmd { padding:var(--s4) var(--s5) 0; font:400 var(--t4)/1.4 var(--mono); color:var(--term-dim) }
 #p1 .qwin .cmd b { color:var(--ok); font-weight:400 }
 #p1 .q { padding:var(--s3) var(--s5) 0; font:700 var(--t1)/1.3 var(--sans); color:var(--ink); min-height:calc(var(--t1) * 1.3 * 2) }
 #p1 .q em { font-style:normal; color:var(--ok) }
-#p1 .pair { position:absolute; left:var(--s6); right:var(--s6); top:568px; display:grid; grid-template-columns:1fr 1fr; gap:var(--s4) }
-#p1 .pair .card { padding:var(--s4) var(--s4) var(--s4) }
+#p1 .pair { position:absolute; left:var(--s6); right:var(--s6); top:600px; display:grid; grid-template-columns:1fr 1fr; gap:var(--s4) }
+#p1 .pair .card { padding:var(--s5) var(--s4) }
 #p1 .tag { font:700 var(--t5)/1.4 var(--mono); letter-spacing:.04em }
 #p1 .hl { margin-top:var(--s2); font:700 var(--t3)/1.35 var(--sans); }
 #p1 .meta { margin-top:var(--s1); font:400 var(--t4)/1.4 var(--sans); color:var(--sub) }
@@ -104,7 +104,7 @@ ul { list-style:none }
 
 
 /* ── 2쪽 ── */
-.cols { position:absolute; left:var(--s6); right:var(--s6); top:232px; bottom:200px; display:grid; grid-template-columns:860px 1fr; gap:var(--s5) }
+.cols { position:absolute; left:var(--s6); right:var(--s6); top:248px; bottom:160px; display:grid; grid-template-columns:860px 1fr; gap:var(--s5) }
 #p2 .flow { padding:var(--s4) var(--s4) var(--s4) }
 #p2 .flow .lbl { font:400 var(--t5)/1.4 var(--mono); color:var(--term-dim) }
 #p2 .chain { margin-top:var(--s3); display:flex; align-items:center; gap:0 }
@@ -115,6 +115,7 @@ ul { list-style:none }
 .spark { stroke:var(--ok); stroke-width:3; stroke-linecap:round; stroke-dasharray:10 90; animation:spark 1.6s linear infinite }
 @keyframes spark { from { stroke-dashoffset:100 } to { stroke-dashoffset:0 } }
 #p2 .cols > div { display:flex; flex-direction:column; justify-content:space-between }
+#p2 .bul { display:flex; flex-direction:column; gap:var(--s5) } #p2 .bul li + li { margin-top:0 }
 #p2 .note { padding:var(--s3) var(--s4); background:var(--blue-soft); border-color:var(--blue-soft) }
 #p2 .note p { font:600 var(--t4)/1.45 var(--sans); color:var(--ink) }
 #p2 .note .lbl { font:700 var(--t5)/1.4 var(--mono); color:var(--blue); margin-bottom:var(--s1) }
@@ -152,15 +153,15 @@ ul { list-style:none }
 #p3 .chart h3, #p5 .viz h3 { font:700 var(--t4)/1.4 var(--sans); color:var(--ink) }
 #p3 .chart svg { margin-top:var(--s3); width:100%; flex:1 }
 .keep { fill:var(--cap) } .new { fill:var(--hot) }
-.bl { font:700 var(--t4) var(--sans); fill:var(--bg) }
+.bl { font:700 var(--t4) var(--sans); fill:var(--panel) }
 .tl { font:700 var(--t4) var(--sans); fill:var(--ink) }
 .badge rect { fill:var(--hot-soft) } .badge text { font:700 var(--t4) var(--sans); fill:var(--hot) }
 .badge.b rect { fill:var(--blue-soft) } .badge.b text { fill:var(--blue) }
-.rise { fill:var(--bg); animation:riseup 2.4s linear infinite }
+.rise { fill:var(--panel); animation:riseup 2.4s linear infinite }
 @keyframes riseup { from { transform:translateY(0); opacity:0 } 20% { opacity:1 } to { transform:translateY(-72px); opacity:0 } }
 
 /* ── 4쪽 ── */
-#p4 .grid { position:absolute; left:var(--s6); right:var(--s6); top:220px; padding:var(--s3) var(--s4) }
+#p4 .grid { position:absolute; left:var(--s6); right:var(--s6); top:248px; padding:var(--s3) var(--s4) }
 #p4 .grid table { width:100%; border-collapse:collapse }
 #p4 .grid th { text-align:left; font:700 var(--t5)/1.4 var(--mono); color:var(--cap); padding:0 var(--s3) var(--s2) 0; border-bottom:1px solid var(--line) }
 #p4 .grid th.c7 { color:var(--blue) } #p4 .grid th.cs { color:var(--hot) }
@@ -168,9 +169,9 @@ ul { list-style:none }
 #p4 .grid tr:last-child td { border-bottom:0 }
 #p4 .grid td:first-child { width:300px; font-weight:700; color:var(--sub) }
 #p4 .grid td i { font-style:normal; color:var(--cap) }
-#p4 .both { position:absolute; left:var(--s6); right:var(--s6); top:752px; display:grid; grid-template-columns:1fr 1fr; gap:var(--s4) }
+#p4 .both { position:absolute; left:var(--s6); right:var(--s6); bottom:160px; display:grid; grid-template-columns:1fr 1fr; gap:var(--s4) }
 #p4 .both p { font:700 var(--t3)/1.4 var(--sans) }
-#p4 .sweep { background:linear-gradient(var(--hot),var(--hot)) left bottom / 0 4px no-repeat; padding-bottom:var(--s1); animation:sweep 3.2s var(--ease) infinite }
+#p4 .sweep { background:linear-gradient(var(--hot),var(--hot)) left bottom / 0 4px no-repeat; animation:sweep 3.2s var(--ease) infinite }
 @keyframes sweep { 0% { background-size:0 4px } 50%,80% { background-size:100% 4px } 100% { background-size:100% 0 } }
 
 /* ── 5쪽 ── */
@@ -180,7 +181,7 @@ ul { list-style:none }
 #p5 canvas { margin-top:var(--s3); width:100%; flex:1; min-height:0 }
 #p5 .yr { margin-top:var(--s2); display:flex; justify-content:space-between; font:700 var(--t4)/1.4 var(--mono); color:var(--ink) }
 #p5 .yr span:last-child { color:var(--hot) }
-#p5 .ans { padding:var(--s4) }
+#p5 .ans { padding:var(--s5) var(--s4) }
 #p5 .ans p { font:400 var(--t4)/1.6 var(--mono); color:var(--term-ink) }
 #p5 .ans .c { color:var(--term-dim) } #p5 .ans .o { color:var(--ok) } #p5 .ans .h { color:var(--hot) }
 
@@ -192,12 +193,14 @@ ul { list-style:none }
 #p6 .log .step { margin-top:var(--s3) }
 #p6 .rec { padding:var(--s3) var(--s4) }
 #p6 .rec table { width:100%; border-collapse:collapse }
-#p6 .rec td { vertical-align:top; padding:var(--s3) 0; border-bottom:1px solid var(--line); font:400 var(--t5)/1.5 var(--sans); color:var(--ink) }
+#p6 .rec td { vertical-align:top; padding:var(--s4) 0; border-bottom:1px solid var(--line); font:400 var(--t5)/1.5 var(--sans); color:var(--ink) }
 #p6 .rec tr:last-child td { border-bottom:0 }
 #p6 .rec td:first-child { width:170px; font-weight:700; color:var(--blue) }
 #p6 .rec .x { color:var(--hot) } #p6 .rec .v { color:var(--ok) }
 #p6 .submit { position:absolute; right:var(--s6); top:var(--s5); }
 
+
+.cur .card.a.on:has(svg, canvas) { animation-duration:var(--viz) }
 /* 인쇄: 쪽마다 1920×1080, 다 나온 상태 */
 @page { size:1920px 1080px; margin:0 }
 @media print {
@@ -232,20 +235,15 @@ body.static .slide::before { animation:none }
       <p class="tag dot-blue">CASE 07 · 서울신문 · 2026.3.3</p>
       <p class="hl">인재 확보가 미래 가른다… 진격의 반도체·AI</p>
       <p class="meta">반도체·AI 인재 확보 경쟁과 계약학과</p>
-      <p class="gist"><span class="mono dot-blue">›</span> 기업은 더 뽑겠다고 하고, 학생은 계약학과로 몰림</p>
+      <p class="gist"><span class="mono dot-blue">›</span> 기업 채용 계획 확대, 학생은 계약학과로 쏠림</p>
     </article>
     <article class="card a">
       <p class="tag dot-hot">유사 사례 · SBS Biz · 2026.9.20</p>
       <p class="hl">'반도체 호황=채용 확대' 아니었다…신규채용 22% 감소</p>
       <p class="meta">반도체 일자리의 구성 변화 (국가데이터처 통계)</p>
-      <p class="gist"><span class="mono dot-hot">›</span> 일자리는 늘었지만 새로 뽑은 몫은 줄어듦</p>
+      <p class="gist"><span class="mono dot-hot">›</span> 일자리는 증가, 신규채용은 감소</p>
     </article>
   </div>
-  <footer class="src a"><table>
-    <tr><th>근거</th><th>출처</th><th>날짜·주소</th></tr>
-    <tr><td>사례 7 기사</td><td>서울신문 장진복 기자</td><td>2026.3.3 · seoul.co.kr/news/economy/industry/2026/03/03/20260303031003</td></tr>
-    <tr><td>유사 사례 기사</td><td>SBS Biz 김기송 기자</td><td>2026.9.20 · biz.sbs.co.kr/amp/article/20000335724</td></tr>
-  </table></footer>
 </section>
 
 <!-- ───────── 2쪽 사례 7 ───────── -->
@@ -257,23 +255,23 @@ body.static .slide::before { animation:none }
   <div class="cols">
     <div>
       <div class="flow term a">
-        <p class="lbl">// 기사가 내다본 흐름</p>
+        <p class="lbl">// 기사가 내다본 흐름 · 삼성전자 반도체(DS)부문</p>
         <div class="chain">
           <span>AI 확산</span>
           <svg viewBox="0 0 100 24" preserveAspectRatio="none"><line class="wire" x1="0" y1="12" x2="100" y2="12"/><line class="spark" x1="0" y1="12" x2="100" y2="12" pathLength="100"/></svg>
           <span>D램·HBM 수요 증가</span>
           <svg viewBox="0 0 100 24" preserveAspectRatio="none"><line class="wire" x1="0" y1="12" x2="100" y2="12"/><line class="spark" x1="0" y1="12" x2="100" y2="12" pathLength="100" style="animation-delay:.8s"/></svg>
-          <span class="end">채용 확대</span>
+          <span class="end">DS부문 채용 확대</span>
         </div>
       </div>
       <ul class="bul">
-        <li class="a">LG CNS는 AI·로보틱스 분야 경력직을 100명 이상 채용함</li>
-        <li class="a">새 직무는 로봇을 현장에 맞게 학습시키고 운영·관제 플랫폼을 고도화하는 일</li>
-        <li class="a">기업은 더 뽑겠다고 하고, 학생은 한 산업에 맞춘 계약학과로 몰림</li>
+        <li class="a">LG CNS, 상반기 AI·로보틱스 경력직 100명 이상 모집 계획</li>
+        <li class="a">새 직무는 로봇 현장 학습과 운영·관제</li>
+        <li class="a">기업은 채용 확대, 학생은 계약학과로 쏠림</li>
       </ul>
       <div class="note card a">
         <p class="lbl">// 읽을 때 주의</p>
-        <p>채용 숫자는 실적이 아니라 기업의 계획과 기사의 전망이고, 경쟁률은 학생들의 기대를 보여 줌</p>
+        <p>채용 숫자는 실적이 아닌 계획과 전망</p>
       </div>
     </div>
     <figure class="chart card a">
@@ -296,12 +294,6 @@ body.static .slide::before { animation:none }
       </svg>
     </figure>
   </div>
-  <footer class="src a"><table>
-    <tr><th>근거</th><th>출처</th><th>날짜·비고</th></tr>
-    <tr><td>채용 확대 흐름 (AI 확산 → 수요 → 채용)</td><td>서울신문 기사 전망 (따로 밝힌 출처 없음)</td><td>2026.3.3</td></tr>
-    <tr><td>LG CNS 경력직 100명 이상, 로봇 직무</td><td>LG CNS 발표, 서울신문 인용</td><td>2026.3.3</td></tr>
-    <tr><td>계약학과 정시 경쟁률 5.93·6.58·9.84</td><td>진학사 자료, 서울신문 인용</td><td>기사의 '지난해·올해'를 2025·2026학년도로 적음</td></tr>
-  </table></footer>
 </section>
 
 <!-- ───────── 3쪽 유사 사례 ───────── -->
@@ -313,7 +305,7 @@ body.static .slide::before { animation:none }
   <div class="cols l">
     <figure class="chart card a">
       <h3>반도체 제조업 임금근로 일자리</h3>
-      <div class="legend" style="display:flex;gap:var(--s4);margin-top:var(--s1);font:400 var(--t5)/1.4 var(--mono)"><span style="color:var(--cap)">■ 계속 일하는 사람</span><span style="color:var(--hot)">■ 새로 뽑은 일자리</span></div>
+      <div class="legend" style="display:flex;gap:var(--s4);margin-top:var(--s1);font:400 var(--t5)/1.4 var(--mono)"><span style="color:var(--cap)">■ 지속일자리</span><span style="color:var(--hot)">■ 신규채용 일자리</span></div>
       <svg viewBox="0 0 800 560">
         <defs><clipPath id="c150"><rect x="150" y="120.0" width="200" height="92.5"/></clipPath><clipPath id="c480"><rect x="480" y="65.0" width="200" height="72.5"/></clipPath></defs>
         <line class="ax" x1="60" y1="500" x2="760" y2="500"/>
@@ -329,7 +321,7 @@ body.static .slide::before { animation:none }
         </g>
         <text class="tl" x="580" y="49.0" text-anchor="middle">17만 4천</text>
         <text class="bl" x="580" y="110.3" text-anchor="middle">2만 9천</text>
-        <text class="bl" x="580" y="181.5" text-anchor="middle">계속 14만 6천</text>
+        <text class="bl" x="580" y="181.5" text-anchor="middle">지속 14만 6천</text>
         <circle class="rise" clip-path="url(#c150)" cx="170" cy="208.5" r="4" style="animation-delay:0.00s"/><circle class="rise" clip-path="url(#c150)" cx="210" cy="208.5" r="4" style="animation-delay:0.45s"/><circle class="rise" clip-path="url(#c150)" cx="250" cy="208.5" r="4" style="animation-delay:0.90s"/><circle class="rise" clip-path="url(#c150)" cx="290" cy="208.5" r="4" style="animation-delay:1.35s"/><circle class="rise" clip-path="url(#c150)" cx="330" cy="208.5" r="4" style="animation-delay:1.80s"/><circle class="rise" clip-path="url(#c480)" cx="500" cy="133.5" r="4" style="animation-delay:0.00s"/><circle class="rise" clip-path="url(#c480)" cx="540" cy="133.5" r="4" style="animation-delay:0.45s"/><circle class="rise" clip-path="url(#c480)" cx="580" cy="133.5" r="4" style="animation-delay:0.90s"/><circle class="rise" clip-path="url(#c480)" cx="620" cy="133.5" r="4" style="animation-delay:1.35s"/><circle class="rise" clip-path="url(#c480)" cx="660" cy="133.5" r="4" style="animation-delay:1.80s"/>
         <g class="badge"><rect x="690" y="72" width="104" height="44" rx="8"/><text x="742" y="102" text-anchor="middle">−21.6%</text></g>
         <g class="badge b"><rect x="690" y="16" width="104" height="44" rx="8"/><text x="742" y="46" text-anchor="middle">+14.5%</text></g>
@@ -339,22 +331,18 @@ body.static .slide::before { animation:none }
     </figure>
     <div class="stack">
       <ul class="bul hot">
-        <li class="a">반도체 일자리는 역대 최대임 (15만 2천 → 17만 4천 개, +14.5%)</li>
-        <li class="a">새로 뽑은 일자리는 줄어듦 (3만 7천 → 2만 9천 개, −21.6%)</li>
-        <li class="a">전체 중 신규채용 비중이 떨어짐 (24.3% → 16.7%)</li>
-        <li class="a">계속 일하는 사람의 일자리는 역대 최대임 (14만 6천 개)</li>
+        <li class="a">반도체 일자리 역대 최대 (15만 2천 → 17만 4천, +14.5%)</li>
+        <li class="a">신규채용 일자리 감소 (3만 7천 → 2만 9천, −21.6%)</li>
+        <li class="a">신규채용 비중 하락 (24.3% → 16.7%)</li>
+        <li class="a">지속일자리 역대 최대 (14만 6천)</li>
+        <li class="a">신규채용은 2024년 저점 뒤 2년 연속 반등, 2018년에는 못 미침</li>
       </ul>
       <div class="note hot card a">
         <p class="lbl">// 읽을 때 주의</p>
-        <p>신규채용은 신입과 경력을 나누지 않은 수치. 업계는 사람보다 설비에 돈이 많이 드는 산업 구조를 이유로 듦</p>
+        <p>신입·경력 구분 없는 수치. 업계 설명은 설비 중심 산업 구조</p>
       </div>
     </div>
   </div>
-  <footer class="src a"><table>
-    <tr><th>근거</th><th>출처</th><th>날짜·비고</th></tr>
-    <tr><td>일자리·신규채용·비중·계속 일자리 수치</td><td>국가데이터처(KOSIS), SBS Biz 인용</td><td>2018년 1분기와 2026년 1분기 비교</td></tr>
-    <tr><td>산업 구조 설명</td><td>업계·현대경제연구원, SBS Biz 인용</td><td>2026.9.20</td></tr>
-  </table></footer>
 </section>
 
 <!-- ───────── 4쪽 개념어 비교 ───────── -->
@@ -366,58 +354,47 @@ body.static .slide::before { animation:none }
   <div class="grid card a">
     <table>
       <tr><th>개념어</th><th class="c7">사례 7 · 서울신문</th><th class="cs">유사 사례 · SBS Biz</th></tr>
-      <tr><td>대체와 보완</td><td>AI가 반도체 수요를 키워 엔지니어의 일이 더 값져짐 (보완)</td><td>일이 값져진 쪽은 이미 일하는 사람. 새로 뽑는 몫은 줄어듦</td></tr>
-      <tr><td>전문성</td><td>계약학과는 학부부터 한 산업을 깊게 파는 길</td><td><i>해석 ·</i> 숙련자가 자리를 지키면 신입이 기초 업무로 배울 기회가 줄어듦</td></tr>
-      <tr><td>기술적 실업</td><td>원인은 AI 수요 전망과 공장 증설. 늘어난 쪽은 경력직과 반도체 전공자</td><td>원인은 설비 중심 산업 구조 (취업유발계수 반도체 2.4명, 제조업 평균 5.1명). 줄어든 쪽은 새로 들어가려는 사람</td></tr>
-      <tr><td>보완재 효과 · 신규 직무 창출</td><td>HBM 수요가 엔지니어 수요로 이어지고, 로봇 학습·운영 직무가 새로 생김</td><td>일자리 총량은 늘었지만 새로 뽑는 몫은 줄어듦</td></tr>
+      <tr><td>대체와 보완</td><td>메모리 수요 증가로 연구개발 인력 채용 확대 전망 (보완)</td><td>지속일자리 역대 최대, 신규채용 비중 하락</td></tr>
+      <tr><td>전문성</td><td>학부부터 한 산업을 깊게 파는 계약학과</td><td><i>해석 ·</i> 숙련자 유지, 신입이 배울 기회 감소</td></tr>
+      <tr><td>기술적 실업</td><td>채용 확대 근거는 메모리 수요와 공장 증설</td><td>신규채용 감소, 설비 중심 구조 (취업유발계수 반도체 2.4명, 제조업 평균 5.1명)</td></tr>
+      <tr><td>보완재 효과 · 신규 직무 창출</td><td>HBM 수요와 연구개발 인력 수요, 로봇 학습·운영 직무 모집</td><td>총량은 증가, 신규채용은 감소</td></tr>
     </table>
   </div>
   <div class="both">
-    <div class="note blue card a"><p class="lbl">// 같은 점</p><p>두 사례 모두 반도체 일자리는 늘어남</p></div>
-    <div class="note hot card a"><p class="lbl">// 다른 점</p><p><span class="sweep">늘어난 몫이 누구에게 갔는지</span></p></div>
+    <div class="note blue card a"><p class="lbl">// 같은 점</p><p>반도체 일자리 증가 흐름</p></div>
+    <div class="note hot card a"><p class="lbl">// 다른 점</p><p>계획과 실제의 차이. <span class="sweep">늘어난 몫은 지속일자리로</span></p></div>
   </div>
-  <footer class="src a"><table>
-    <tr><th>근거</th><th>출처</th><th>날짜·비고</th></tr>
-    <tr><td>사례 7 칸</td><td>서울신문 (LG CNS 발표, 진학사 자료 포함)</td><td>2026.3.3</td></tr>
-    <tr><td>유사 사례 칸</td><td>국가데이터처(KOSIS), SBS Biz 인용</td><td>2026.9.20 · '해석' 표시 칸은 발표자 해석</td></tr>
-    <tr><td>취업유발계수 2.4명·5.1명</td><td>한국은행 (2023년 기준), SBS Biz 인용</td><td>2026.9.20</td></tr>
-  </table></footer>
 </section>
 
 <!-- ───────── 5쪽 판단 ───────── -->
 <section class="slide" id="p5">
   <header class="head a">
     <div class="eyebrow"><span>// 05 · <b>핵심 질문과의 연결</b></span><span>05 / 06</span></div>
-    <h2 class="title">일자리는 늘었지만, 늘어난 몫은 이미 일하던 사람에게 감</h2>
+    <h2 class="title">일자리는 증가, 늘어난 몫은 이미 일하던 사람에게</h2>
   </header>
   <div class="cols">
     <figure class="viz card a">
-      <h3>반도체 일자리 안과 들어오는 문</h3>
-      <div class="legend"><span class="k">● 일자리 1천 개</span><span class="n">● 새로 뽑은 일자리</span><span>문 너비 = 새로 뽑은 수</span></div>
+      <h3>반도체 일자리와 들어오는 문</h3>
+      <div class="legend"><span class="k">● 상자 안 점 1개 = 일자리 1천 개</span><span class="n">● 신규채용 일자리</span><span>문 너비 = 신규채용 수</span></div>
       <canvas id="door" width="1560" height="760"></canvas>
       <div class="yr"><span id="yrA">2026 1분기 · 일자리 17만 4천</span><span id="yrB">신규 2만 9천 · 비중 16.7%</span></div>
     </figure>
     <div class="stack">
       <ul class="bul">
-        <li class="a">사례 7은 깊게 판 전공자의 수요가 늘었음을 보여 줌</li>
-        <li class="a">유사 사례는 늘어난 몫이 이미 일하던 사람에게 갔음을 보여 줌</li>
-        <li class="a">경력직 중심 채용은 6번 사례(경력직 수시채용)와 같은 흐름</li>
+        <li class="a">사례 7은 연구개발 인력 채용 확대 전망</li>
+        <li class="a">유사 사례는 지속일자리로 쏠린 증가분</li>
+        <li class="a">경력직 모집은 6번 사례(경력직 수시채용)와 연결</li>
       </ul>
       <div class="ans term a">
         <p><span class="o">$</span> answer --case 07</p>
         <p><span class="c">// 깊게 파는 것은 여전히 유리한가</span></p>
-        <p>이미 들어간 사람 <span class="o">→ 유리함</span></p>
-        <p>들어가려는 사람 <span class="h">→ 문이 넓어지지 않음</span></p>
+        <p>이미 들어간 사람 <span class="o">→ 유리</span></p>
+        <p>들어가려는 사람 <span class="h">→ 좁은 문</span></p>
         <p><span class="c">// 입장 '여전히 유리하다'</span></p>
-        <p><span class="o">→</span> 반만 맞음. 누구에게 유리한지 나눠 봐야 함</p>
+        <p><span class="o">→</span> 절반만 맞음, 누구에게인지 구분 필요</p>
       </div>
     </div>
   </div>
-  <footer class="src a"><table>
-    <tr><th>근거</th><th>출처</th><th>날짜·비고</th></tr>
-    <tr><td>일자리·신규채용·비중 (그림의 점과 문)</td><td>국가데이터처(KOSIS), SBS Biz 인용</td><td>점 1개 = 일자리 1천 개 · 2018·2026년 1분기</td></tr>
-    <tr><td>6번 사례 (경력직 수시채용)</td><td>13주차 강의안 사례 목록</td><td>2026.11.24 수업</td></tr>
-  </table></footer>
 </section>
 
 <!-- ───────── 6쪽 AI 활용 기록 ───────── -->
@@ -436,21 +413,18 @@ body.static .slide::before { animation:none }
       <p class="step a"><span class="c">04</span> 원문 재대조 <span class="c">· AI 설명 3곳</span> <span class="h">[fix]</span></p>
       <p class="step a"><span class="c">05</span> 유사 사례 탐색 <span class="c">· 4 → 3 → 1건</span> <span class="o">[ok]</span></p>
       <p class="step a"><span class="c">06</span> 장표 제작 <span class="c">· 토큰, 린트, 교차검증</span> <span class="o">[ok]</span></p>
+      <p class="step a"><span class="o">$</span> lint index.html <span class="c">· 6쪽</span> <span class="o">[pass]</span></p>
+      <p class="step a"><span class="o">$</span> verify --gpt <span class="c">· 원문 대조 지적 반영</span> <span class="o">[ok]</span></p>
       <p class="step a"><span class="o">done.</span> <span class="caret"></span></p>
     </div>
     <div class="rec card a"><table>
-      <tr><td>사용한 도구</td><td>Claude · 원문 확인, 수치 대조, 유사 사례 검색, 장표 제작<br>GPT · 장표 수치와 출처 교차검증</td></tr>
+      <tr><td>사용한 도구</td><td>Claude · 원문 확인, 수치 대조, 유사 사례 검색, 장표 제작<br>GPT · 수치와 출처 교차검증</td></tr>
       <tr><td>핵심 프롬프트</td><td>① "서울신문 기사(2026.3.3)의 수치와 출처를 문단별로 정리하고, 다시 읽기 질문과 공통 개념어로 재분석할 것"<br>② "같은 쟁점에서 결과가 다르게 나온 기사를 찾아 원문 수치와 출처를 확인할 것"</td></tr>
-      <tr><td>확인한 것</td><td>경쟁률 5.93·6.58·9.84의 출처(진학사), SBS 수치의 출처(국가데이터처)와 비교 시점</td></tr>
-      <tr><td>고친 것</td><td><span class="x">✗</span> 반도체 계약학과 수치를 정시·진학사 자료로 단정 <span class="v">→ 원문에 기준·출처 표기 없음</span><br><span class="x">✗</span> AI는 간접 원인으로만 나온다고 설명 <span class="v">→ 원문에 'AI 확산에 따른 수요 증가' 문장 있음</span><br><span class="x">✗</span> 계약학과 지원이 둔화됐다고 설명 <span class="v">→ 2027 수시 지원은 19.4% 증가</span></td></tr>
-      <tr><td>유사 사례</td><td>후보 4건 검색, 원문 확인 3건, 1건은 페이지 글자 깨짐으로 제외 → SBS Biz 선정<br>biz.sbs.co.kr/amp/article/20000335724</td></tr>
+      <tr><td>확인한 것</td><td>경쟁률 출처(진학사), SBS 수치 출처(국가데이터처)와 비교 시점</td></tr>
+      <tr><td>고친 것</td><td><span class="x">✗</span> 반도체 계약학과 수치를 정시·진학사로 단정 <span class="v">→ 해당 문단엔 기준·출처 없음</span><br><span class="x">✗</span> AI는 간접 원인으로만 언급 <span class="v">→ 원문에 AI 확산·메모리 수요 문장</span><br><span class="x">✗</span> 계약학과 지원 둔화 <span class="v">→ 5개 대학 수시 지원 19.4% 증가</span></td></tr>
+      <tr><td>유사 사례</td><td>후보 4건 → 원문 확인 3건 → SBS Biz 선정 (1건 글자 깨짐 제외)<br>biz.sbs.co.kr/amp/article/20000335724</td></tr>
     </table></div>
   </div>
-  <footer class="src a"><table>
-    <tr><th>근거</th><th>출처</th><th>날짜·비고</th></tr>
-    <tr><td>2027 수시 지원 19.4% 증가</td><td>머니투데이 (종로학원 집계)</td><td>2026.9.11</td></tr>
-    <tr><td>정정한 원문 문장</td><td>서울신문</td><td>2026.3.3</td></tr>
-  </table></footer>
 </section>
 
 </div>
@@ -471,13 +445,13 @@ const hooks={
     const Y={2018:{tot:152,neu:37,txt:['2018 1분기 · 일자리 15만 2천','신규 3만 7천 · 비중 24.3%']},2026:{tot:174,neu:29,txt:['2026 1분기 · 일자리 17만 4천','신규 2만 9천 · 비중 16.7%']}};
     const boxL=360, boxT=40, boxB=H-40, R=8;
     const dots=Array.from({length:174},(_,i)=>({x:boxL+40+Math.random()*(W-boxL-120),y:boxT+40+Math.random()*(boxB-boxT-80),vx:(Math.random()-.5)*1.2,vy:(Math.random()-.5)*1.2}));
-    let yr=2018, cur={tot:152,neu:37,door:37*6}, flow=[];
+    let yr=2018, cur={tot:152,neu:37,door:37*3.5}, flow=[];
     const setYr=y=>{ yr=y; s.querySelector('#yrA').textContent=Y[y].txt[0]; s.querySelector('#yrB').textContent=Y[y].txt[1]; };
-    setYr(STATIC?2026:2018); if(STATIC){ yr=2026; cur={tot:174,neu:29,door:29*6}; }
+    setYr(STATIC?2026:2018); if(STATIC){ yr=2026; cur={tot:174,neu:29,door:29*3.5}; }
     cancelAnimationFrame(cv._raf); clearInterval(cv._iv);
     if(!STATIC) cv._iv=setInterval(()=>setYr(yr===2018?2026:2018),4000);
     const frame=()=>{
-      const tg=Y[yr]; cur.tot+=(tg.tot-cur.tot)*.05; cur.neu+=(tg.neu-cur.neu)*.05; cur.door+=(tg.neu*6-cur.door)*.05;
+      const tg=Y[yr]; cur.tot+=(tg.tot-cur.tot)*.08; cur.neu+=(tg.neu-cur.neu)*.08; cur.door+=(tg.neu*3.5-cur.door)*.08;
       const boxR=boxL+(W-boxL-20)*(cur.tot/174);
       ctx.clearRect(0,0,W,H);
       // 상자
@@ -493,7 +467,7 @@ const hooks={
       // 문으로 들어오는 흐름
       if(!STATIC && Math.random()<cur.neu/90) flow.push({x:20,y:mid+(Math.random()-.5)*cur.door*.8});
       ctx.fillStyle=C('--hot');
-      flow=flow.filter(f=>{ f.x+=6; ctx.globalAlpha=Math.max(0,1-(f.x-boxL)/160); ctx.beginPath(); ctx.arc(f.x,f.y,R,0,7); ctx.fill(); ctx.globalAlpha=1; return f.x<boxL+160; });
+      flow=flow.filter(f=>{ f.x+=6; ctx.globalAlpha=Math.max(0,1-(f.x-boxL)/160); ctx.beginPath(); ctx.arc(f.x,f.y,R*.6,0,7); ctx.fill(); ctx.globalAlpha=1; return f.x<boxL+160; });
       if(!STATIC) cv._raf=requestAnimationFrame(frame);
     };
     frame();

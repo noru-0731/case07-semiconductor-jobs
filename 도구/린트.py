@@ -7,7 +7,7 @@ import json, sys, pathlib
 from playwright.sync_api import sync_playwright
 
 SIZES = {64, 40, 30, 24, 18}
-COLORS = {"#0f1318","#161b22","#e6edf3","#9da7b3","#6e7681","#262c36","#0b0e13","#c9d1d9","#6e7681","#58a6ff","#13233a","#ff7b5c","#3a1d17","#3fb950"}
+COLORS = {"#f6f8fa","#ffffff","#1f2328","#59636e","#8c959f","#d8dee4","#eef1f4","#0969da","#ddf4ff","#d4512b","#fff1e5","#1a7f37"}
 SAFE = dict(left=64, right=1856, top=40, bottom=1060)
 MAX_GAP_Y, MAX_GAP_X = 96, 160
 
@@ -66,8 +66,8 @@ JS = r"""
     let inner = 0; for (let i = 1; i < kids.length; i++) inner = Math.max(inner, kids[i].top - kids[i-1].bottom);
     if (hi > -Infinity) out.cells.push({name: c.tagName.toLowerCase() + '.' + (c.className || ''), top: lo - inTop, bottom: inBot - hi, inner});
   }
-  const h = s.querySelector('.head').getBoundingClientRect(), f = s.querySelector('.src').getBoundingClientRect();
-  out.region = {top: h.bottom, bottom: f.top};
+  const h = s.querySelector('.head').getBoundingClientRect(), fe = s.querySelector('.src');
+  out.region = {top: h.bottom, bottom: fe ? fe.getBoundingClientRect().top : 1016};
   return out;
 }
 """
