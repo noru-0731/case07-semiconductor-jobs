@@ -1,0 +1,3 @@
+*.pdf
+.DS_Store
+도구/__pycache__/
